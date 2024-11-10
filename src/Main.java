@@ -15,6 +15,7 @@ public class Main {
         for (i = 0; i < QUANT_FRUTAS; i++) {
             System.out.printf("%-3d| %-10s| R$%4.2f\n", i + 1, frutas[i], precoFrutas[i]);
         }
+        divConsole();
     }
 
     public static void exibirNF(ArrayList<Double> precosFrutaNF, ArrayList<Integer> quantFrutasNF, ArrayList<String> frutasNF, double[] precoFrutas) {
@@ -31,10 +32,10 @@ public class Main {
         divConsole();
     }
     public static void main(String[] args) throws InterruptedException {
+        Scanner scanner = new Scanner(System.in);
         ArrayList<Double> precosFrutaNF = new ArrayList<>();
         ArrayList<Integer> quantFrutasNF = new ArrayList<>();
         ArrayList<String> frutasNF = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
 
         int frutaEscolhida;
         int quantFrutas;
@@ -57,7 +58,7 @@ public class Main {
                 continue;
             }
             do {
-                System.out.print("Digite a quantidade (1 a 1000): ");
+                System.out.print("Digite a quantidade (limitada a 1000): ");
                 quantFrutas = scanner.nextInt();
                 if (quantFrutas < 1 || quantFrutas > 1000) {
                     System.out.println("Você não pode colocar quantidades negativas ou absurdas!");
@@ -91,14 +92,12 @@ public class Main {
             switch (opcMetodoPag) {
                 case 1, 3:
                     String msg = "Aguardando pagamento.";
-                    System.out.println(msg);
-                    Thread.sleep(1000);
-                    msg += ".";
-                    System.out.println(msg);
-                    Thread.sleep(1000);
-                    msg += ".";
-                    System.out.println(msg);
-                    Thread.sleep(1000);
+                    for (i = 0; i < 3; i++) {
+                        System.out.println(msg);
+                        Thread.sleep(1000);
+                        msg += ".";
+                    }
+                    Thread.sleep(1250);
                     System.out.println("Pagamento aprovado!");
                     Thread.sleep(800);
                     break;
