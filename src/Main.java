@@ -52,8 +52,8 @@ public class Main {
                 System.out.println("Até mais tarde! :D");
                 System.exit(0);
             }
-            if (frutaEscolhida < 0 || frutaEscolhida > 6) {
-                System.out.println("Escolha uma opção entre 0 e 6!");
+            if (frutaEscolhida < 0 || frutaEscolhida > QUANT_FRUTAS) {
+                System.out.printf("Escolha uma opção entre 0 e %d!", QUANT_FRUTAS);
                 continue;
             }
             do {
@@ -75,49 +75,55 @@ public class Main {
             continuar = scanner.next().trim().toUpperCase().charAt(0);
             divConsole();
         } while (continuar == 'S');
+
         exibirNF(precosFrutaNF, quantFrutasNF, frutasNF, precoFrutas);
-        System.out.println("Qual será o método de pagamento?");
-        System.out.println("1. Cartão de crédito/débito");
-        System.out.println("2. Dinheiro");
-        System.out.println("3. Pix");
-        System.out.print("Resposta: ");
-        int opcMetodoPag = scanner.nextInt();
-        divConsole();
-        switch (opcMetodoPag) {
-            case 1, 3:
-                String msg = "Aguardando pagamento.";
-                System.out.println(msg);
-                Thread.sleep(1000);
-                msg += ".";
-                System.out.println(msg);
-                Thread.sleep(1000);
-                msg += ".";
-                System.out.println(msg);
-                Thread.sleep(1000);
-                System.out.println("Pagamento aprovado!");
-                Thread.sleep(800);
-                break;
-            case 2:
-                double dinheiroTotal = 0.0;
-                double dinheiroEnviado;
-                do {
-                    System.out.printf("Valor da compra: R$%.2f\n", valorTotal);
-                    System.out.printf("Dinheiro dado: R$%.2f\n", dinheiroTotal);
-                    System.out.print("Valor que você dará: R$");
-                    dinheiroEnviado = scanner.nextDouble();
-                    dinheiroTotal += dinheiroEnviado;
-                    if (dinheiroTotal < valorTotal) {
-                        System.out.println("O dinheiro que você deu não é suficiente para pagar a compra!");
-                        divConsole();
-                    } else {
-                        System.out.printf("Seu troco é de R$%.2f\n", (float) Math.abs(valorTotal - dinheiroTotal));
-                    }
-                } while (dinheiroTotal < valorTotal);
-                break;
-        }
+        int opcMetodoPag;
+
+        do {
+            System.out.println("Qual o método de pagamento?");
+            System.out.println("1. Cartão de crédito/débito");
+            System.out.println("2. Dinheiro");
+            System.out.println("3. Pix");
+            System.out.print("Resposta: ");
+            opcMetodoPag = scanner.nextInt();
+            divConsole();
+
+            switch (opcMetodoPag) {
+                case 1, 3:
+                    String msg = "Aguardando pagamento.";
+                    System.out.println(msg);
+                    Thread.sleep(1000);
+                    msg += ".";
+                    System.out.println(msg);
+                    Thread.sleep(1000);
+                    msg += ".";
+                    System.out.println(msg);
+                    Thread.sleep(1000);
+                    System.out.println("Pagamento aprovado!");
+                    Thread.sleep(800);
+                    break;
+                case 2:
+                    double dinheiroTotal = 0.0;
+                    double dinheiroEnviado;
+                    do {
+                        System.out.printf("Valor da compra: R$%.2f\n", valorTotal);
+                        System.out.printf("Dinheiro dado: R$%.2f\n", dinheiroTotal);
+                        System.out.print("Valor que você dará: R$");
+                        dinheiroEnviado = scanner.nextDouble();
+                        dinheiroTotal += dinheiroEnviado;
+                        if (dinheiroTotal < valorTotal) {
+                            System.out.println("O dinheiro que você deu não é suficiente para pagar a compra!");
+                            divConsole();
+                        } else {
+                            System.out.printf("Seu troco é de R$%.2f\n", (float) Math.abs(valorTotal - dinheiroTotal));
+                        }
+                    } while (dinheiroTotal < valorTotal);
+                    break;
+                default:
+                    System.out.println("Digite um valor válido!");
+            }
+        } while (opcMetodoPag < 1 || opcMetodoPag > 3);
         System.out.println("Volte sempre! :)");
         scanner.close();
-
-
     }
 }
