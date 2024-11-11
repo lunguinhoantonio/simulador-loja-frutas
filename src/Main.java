@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
     public static final int QUANT_FRUTAS = 10;
-    public static int i;
     public static double valorTotal = 0.0;
     public static void divConsole() {
         System.out.println("-----------------------------------------");
@@ -12,7 +11,7 @@ public class Main {
         System.out.println("0. Nada, tô só olhando.");
         System.out.println("ID |  Frutas   | Preço");
         divConsole();
-        for (i = 0; i < QUANT_FRUTAS; i++) {
+        for (int i = 0; i < QUANT_FRUTAS; i++) {
             System.out.printf("%-3d| %-10s| R$%4.2f\n", i + 1, frutas[i], precoFrutas[i]);
         }
         divConsole();
@@ -23,7 +22,7 @@ public class Main {
             divConsole();
             System.out.printf("%-10s %-8s %-6s %s\n", "Fruta", "Valor Unit", "Quant", "Preço (R$)");
             divConsole();
-        for (i = 0; i < precosFrutaNF.size(); i++) {
+        for (int i = 0; i < precosFrutaNF.size(); i++) {
             System.out.printf("%-10s R$%-8.2f %-10d R$%-8.2f\n", frutasNF.get(i), precoFrutas[i], quantFrutasNF.get(i), precosFrutaNF.get(i));
             valorTotal += precosFrutaNF.get(i);
         }
@@ -92,7 +91,7 @@ public class Main {
             switch (opcMetodoPag) {
                 case 1, 3:
                     String msg = "Aguardando pagamento.";
-                    for (i = 0; i < 3; i++) {
+                    for (int i = 0; i < 3; i++) {
                         System.out.println(msg);
                         Thread.sleep(1000);
                         msg += ".";
