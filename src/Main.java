@@ -23,7 +23,7 @@ public class Main {
             System.out.printf("%-10s %-8s %-6s %s\n", "Fruta", "Valor Unit", "Quant", "Preço (R$)");
             divConsole();
         for (int i = 0; i < precosFrutaNF.size(); i++) {
-            System.out.printf("%-10s R$%-8.2f %-10d R$%-8.2f\n", frutasNF.get(i), precoFrutas[i], quantFrutasNF.get(i), precosFrutaNF.get(i));
+            System.out.printf("%-10s R$%-10.2f %-8d R$%-2.2f\n", frutasNF.get(i), precoFrutas[i], quantFrutasNF.get(i), precosFrutaNF.get(i));
             valorTotal += precosFrutaNF.get(i);
         }
         divConsole();
