@@ -7,8 +7,12 @@ public class Main {
         System.out.println("-----------------------------------------");
     }
 
-    public static void exibirMenu(double[] precoFrutas, String[] frutas) {
-        System.out.println("0. Nada, tô só olhando.");
+    public static void exibirMenu(double[] precoFrutas, String[] frutas, int qntdLoop) {
+        if (qntdLoop < 1) {
+            System.out.println("0. Nada, tô só olhando.");
+        } else {
+            System.out.println("0. Desistirei de todas as compras.");
+        }
         System.out.println("ID |  Frutas   | Preço");
         divConsole();
         for (int i = 0; i < QUANT_FRUTAS; i++) {
@@ -18,10 +22,10 @@ public class Main {
     }
 
     public static void exibirNF(ArrayList<Double> precosFrutaNF, ArrayList<Integer> quantFrutasNF, ArrayList<String> frutasNF, double[] precoFrutas) {
-            System.out.println("              NOTA FISCAL              ");
-            divConsole();
-            System.out.printf("%-10s %-8s %-6s %s\n", "Fruta", "Valor Unit", "Quant", "Preço (R$)");
-            divConsole();
+        System.out.println("              NOTA FISCAL              ");
+        divConsole();
+        System.out.printf("%-10s %-8s %-6s %s\n", "Fruta", "Valor Unit", "Quant", "Preço (R$)");
+        divConsole();
         for (int i = 0; i < precosFrutaNF.size(); i++) {
             System.out.printf("%-10s R$%-10.2f %-8d R$%-2.2f\n", frutasNF.get(i), precoFrutas[i], quantFrutasNF.get(i), precosFrutaNF.get(i));
             valorTotal += precosFrutaNF.get(i);
@@ -30,30 +34,33 @@ public class Main {
         System.out.printf("TOTAL: R$%.2f\n", valorTotal);
         divConsole();
     }
+    
     public static void main(String[] args) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
+        int qntdLoop = 0;
         ArrayList<Double> precosFrutaNF = new ArrayList<>();
         ArrayList<Integer> quantFrutasNF = new ArrayList<>();
         ArrayList<String> frutasNF = new ArrayList<>();
 
         int frutaEscolhida;
         int quantFrutas;
-        char continuar = 'S';
+        char continuar = 0;
         String[] frutas = {"Abacaxi", "Banana", "Kiwi", "Laranja", "Manga", "Goiaba", "Maçã", "Morango", "Pera", "Maracujá"};
         double[] precoFrutas = {4.0, 0.8, 2.8, 1.2, 2.0, 2.50, 1.5, 3.5, 2.0, 1.85};
 
         System.out.println("Bem vindo à loja de frutas!\nQual fruta deseja?");
 
         do {
-            exibirMenu(precoFrutas, frutas);
+            exibirMenu(precoFrutas, frutas, qntdLoop);
             System.out.print("Resposta: ");
             frutaEscolhida = scanner.nextInt();
             if (frutaEscolhida == 0) {
-                System.out.println("Até mais tarde! :D");
+                System.out.println("Tá bom, Até mais tarde :D!");
                 System.exit(0);
             }
             if (frutaEscolhida < 0 || frutaEscolhida > QUANT_FRUTAS) {
-                System.out.printf("Escolha uma opção entre 0 e %d!", QUANT_FRUTAS);
+                System.out.printf("Escolha uma opção entre 0 e %d!\n", QUANT_FRUTAS);
+                divConsole();
                 continue;
             }
             do {
@@ -74,6 +81,7 @@ public class Main {
             System.out.print("Vai querer mais alguma coisa? [S/N]: ");
             continuar = scanner.next().trim().toUpperCase().charAt(0);
             divConsole();
+            qntdLoop++;
         } while (continuar == 'S');
 
         exibirNF(precosFrutaNF, quantFrutasNF, frutasNF, precoFrutas);
